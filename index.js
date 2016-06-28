@@ -105,6 +105,9 @@ function csurf (options) {
     if (!secret) {
       secret = tokens.secretSync()
       setSecret(req, res, sessionKey, secret, cookie)
+    } else if(opts.refreshSecret) {
+      // update the expires date of the current cookie
+      setSecret(req, res, sessionKey, secret, cookie)
     }
 
     // verify the incoming token
